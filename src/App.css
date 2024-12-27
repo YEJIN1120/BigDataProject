@@ -1,0 +1,67 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-btn{
+  display: flex;  
+  justify-content: end;
+  align-items: center;
+  margin: 30px 30px 0 ;
+}
+
+.login{
+  margin-left: 3px;
+  cursor: pointer;
+}
+
+.menu-area{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.menu-list{
+  display: flex;
+  list-style: none;
+  padding:0;
+}
+
+.menu-list li{
+  padding:10px;
+  cursor: pointer;
+}
+
+.menu-list div{
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  padding: 10px;
+}
+
+.search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.search input{
+  border: none;
+  margin-left: 6px;
+  height: full;
+}
+
+.search div{
+  margin-left: 10px;
+  height: full;
+}
+
+.search-bar{
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid black;
+  margin-right: 30px;
+  padding: 5px;
+}
