@@ -1,7 +1,21 @@
 .header{
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 80px;
+}
+
+.menu-area{
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.title{
+  font-size: 2.2rem;
+  font-weight: bold;
 }
 
 .login-btn{
@@ -16,52 +30,57 @@
   cursor: pointer;
 }
 
-.menu-area{
-  display: flex;
-  justify-content: end;
-  align-items: center;
+/* 배경 (화면 클릭 닫기 용) */
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
 }
 
-.menu-list{
-  display: flex;
+/* 슬라이드 메뉴 */
+.side-menu{
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 250px;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+  padding: 20px;
+}
+
+/* 슬라이드 메뉴가 열렸을 때 */
+.side-menu.open{
+  right: 0;
+}
+
+.side-menu ul{
   list-style: none;
-  padding:0;
+  padding: 0;
 }
 
-.menu-list li{
-  padding:10px;
+.side-menu ul li{
+  margin: 15px 0;
+  font-size: 16px;
   cursor: pointer;
 }
 
-.menu-list div{
-  width: 20px;
-  height: 20px;
-  margin-top: 2px;
-  padding: 10px;
-}
-
-.search{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.search input{
+.menu-button{
+  color: black;
+  background-color: white;
   border: none;
-  margin-left: 6px;
-  height: full;
+  cursor: pointer;
+  font-size: 24px;
+  margin-right: 23px;
 }
 
-.search div{
-  margin-left: 10px;
-  height: full;
+.menu-button:hover{
+  background-color: #ffffff;
 }
 
-.search-bar{
-  display: flex;
-  align-items: center;
-  border-bottom: 2px solid black;
-  margin-right: 30px;
-  padding: 5px;
-}

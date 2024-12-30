@@ -36,7 +36,7 @@ export default function Loginmodal({ isOpen, onClose }) {
         <ModalBody>
           {/* 로그인 폼 */}
           <Form onSubmit={handleSubmit}>
-            <FormGroup>
+            <FormGroup className={styles.formGroup}>
               <Label for="userId">ID</Label>
               <Input className={styles.input}
                       id="userId"
@@ -45,7 +45,7 @@ export default function Loginmodal({ isOpen, onClose }) {
                       onChange={(e) => setUserId(e.target.value)}
                       placeholder="아이디를 입력하세요" />
             </FormGroup>
-            <FormGroup>
+            <FormGroup className={styles.formGroup}>
               <Label for="password">PW</Label>
               <Input className={styles.input}
                      id="password" 
