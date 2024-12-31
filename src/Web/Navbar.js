@@ -1,10 +1,11 @@
 // import TailButton from "./TailButton"
-import { useNavigate } from "react-router-dom"
 import React, { useState } from 'react';
 import { IoPersonOutline } from 'react-icons/io5';
 import { IoIosMenu } from 'react-icons/io';
+import { Button } from 'reactstrap';
 import Loginmodal from "./Login/Loginmodal";
-export default function Navbar() {
+
+export default function Navbar({ isLoggedIn, onLogout, onLoginClick }) {
   // 모달 상태 관리
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -28,10 +29,15 @@ export default function Navbar() {
 
   return (
     <div>
-      {/* 로그인 버튼 */}
+      {/* 로그인/로그아웃 버튼 */}
       <div className='login-btn'>
         <IoPersonOutline />
-        <div onClick={openModal} className='login'>로그인</div>
+        {isLoggedIn ? (
+          <Button color="danger" onClick={onLogout}>로그아웃</Button>
+        ) : (
+          <div onClick={onLoginClick} className='login'>로그인</div>
+        )}
+        {/* <div onClick={openModal} className='login'>로그인</div> */}
       </div>
       
       {/* 헤더 */}
@@ -51,7 +57,7 @@ export default function Navbar() {
       {isMenuOpen && <div className="overlay" onClick={closeMenu}></div>}
       <div className={`side-menu ${isMenuOpen ? "open" : ""}`}>
         <ul>
-          <li>1</li>
+          <li>커뮤니티</li>
           <li>2</li>
           <li>3</li>
         </ul>

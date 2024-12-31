@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   const [addr1List, setAddr1List] = useState([]);
@@ -124,7 +125,7 @@ export default function Home() {
 
       <div style={{ marginTop: "20px" }}>
         <button
-          onClick={handleSearchClick} 
+          onClick={handleSearchClick}
           style={{
             padding: "10px",
             fontSize: "15px",
@@ -144,18 +145,24 @@ export default function Home() {
       {hospitalList.length > 0 && (
         <div style={{ marginTop: "40px" }}>
           <h3>병원 목록</h3>
-          <table style={{ borderCollapse: "collapse", width: "100%" }}>
+          <table style={{ borderCollapse: "collapse", width: "100%", maxWidth: "600px", margin: "0 auto", tableLayout: "fixed" }}>
             <thead>
               <tr>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>병원 이름</th>
-                <th style={{ border: "1px solid #ddd", padding: "8px" }}>주소</th>
+                <th style={{ border: "1px solid #ddd", padding: "8px", width: "50%", textAlign: "left" }}>병원 이름</th>
+                <th style={{ border: "1px solid #ddd", padding: "8px", width: "50%", textAlign: "left" }}>주소</th>
               </tr>
             </thead>
             <tbody>
-              {hospitalList.map((hospital, index) => (
-                <tr key={index}>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>{hospital.dutyname}</td>
-                  <td style={{ border: "1px solid #ddd", padding: "8px" }}>{hospital.dutyaddr}</td>
+              {hospitalList.map((hospital) => (
+                <tr key={hospital.id}>
+                  <td style={{ border: "1px solid #ddd", padding: "8px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    <Link to={`/hospital/${hospital.hpid}`} style={{ color: "blue", textDecoration: "none" }}>
+                      {hospital.dutyname}
+                    </Link>
+                  </td>
+                  <td style={{ border: "1px solid #ddd", padding: "8px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    {hospital.dutyaddr}
+                  </td>
                 </tr>
               ))}
             </tbody>
