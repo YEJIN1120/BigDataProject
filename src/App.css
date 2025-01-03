@@ -25,9 +25,15 @@
   margin: 30px 30px 0 ;
 }
 
-.login{
-  margin-left: 3px;
+/* 로그인 로그아웃 Navbar */
+.auth-btn{
   cursor: pointer;
+  padding: 5px;
+  background-color: white;
+  border: none;
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+  text-align: center;
 }
 
 /* 배경 (화면 클릭 닫기 용) */
@@ -84,3 +90,68 @@
   background-color: #ffffff;
 }
 
+/* HospitalDetail.css */
+.container{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding:20px;
+}
+
+.card{
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.title{
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.info{
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.button-container{
+  display: flex;
+  justify-content: space-between;
+  gap: 0px;
+  margin-top: 20px;
+}
+
+.button-container .btn{
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #ffffff;
+  border: 1px solid #d8d8d8;
+  cursor: pointer;
+  
+}
+
+.button-container .btn:hover{
+  border: 1px solid #7a7a7a; /* 테두리 색 추가 */
+}
+
+.button-container .btn.clicked{
+  background-color: #ececec; /* 클릭 시 색 변경 */
+  border: 1px solid #d8d8d8; /* 클릭 시 테두리 색 변경 */
+}
+
+.info-contant{
+  margin-top:20px;
+}
+
+.info-contant h4{
+  font-size: 18px;
+  font-weight: bold;
+}

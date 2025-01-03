@@ -62,7 +62,7 @@ export default function Home() {
   // 병원 정보 가져오기
   const handleSearchClick = () => {
     if (!selectedAddr1 || !selectedAddr2) {
-      alert("시도와 시군구를 선택해주세요.");
+      alert("지역을 선택해주세요.");
       return;
     }
 
@@ -100,7 +100,7 @@ export default function Home() {
           >
             <option value="">== 시도 ==</option>
             {addr1List.map((addr1, index) => (
-              <option key={index} value={addr1}>
+              <option key={'add1' + index} value={addr1}>
                 {addr1}
               </option>
             ))}
@@ -115,7 +115,7 @@ export default function Home() {
           >
             <option value="">== 시군구 ==</option>
             {addr2List.map((addr2, index) => (
-              <option key={index} value={addr2}>
+              <option key={'addr2' + index} value={addr2}>
                 {addr2}
               </option>
             ))}
@@ -148,7 +148,7 @@ export default function Home() {
           <table style={{ borderCollapse: "collapse", width: "100%", maxWidth: "600px", margin: "0 auto", tableLayout: "fixed" }}>
             <thead>
               <tr>
-                <th style={{ border: "1px solid #ddd", padding: "8px", width: "50%", textAlign: "left" }}>병원 이름</th>
+                <th style={{ border: "1px solid #ddd", padding: "8px", width: "50%", textAlign: "left" }}>의료기관명</th>
                 <th style={{ border: "1px solid #ddd", padding: "8px", width: "50%", textAlign: "left" }}>주소</th>
               </tr>
             </thead>

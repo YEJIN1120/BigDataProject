@@ -86,7 +86,7 @@ export default function Loginmodal({ isOpen, onClose, onLoginSuccess }) {
                 placeholder="비밀번호를 입력하세요"
               />
             </FormGroup>
-            <Button color="primary" type="submit">로그인</Button>
+            <Button className={styles.loginbutton} color="primary" type="submit">로그인</Button>
           </Form>
         </ModalBody>
       </Modal>

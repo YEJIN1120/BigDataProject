@@ -61,7 +61,7 @@ label{
   margin-left: 10px;
 }
 
-button{
+.loginbutton{
   background-color: darkred;
   border-color: #ffffff;
   color: rgb(255, 255, 255);
@@ -72,6 +72,6 @@ button{
   transition: background-color 0.3s;
 }
 
-button:hover{
+.loginbutton:hover{
   background-color: rgb(209, 1, 1);
 }

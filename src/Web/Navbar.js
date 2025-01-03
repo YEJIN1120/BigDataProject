@@ -1,31 +1,36 @@
-// import TailButton from "./TailButton"
 import React, { useState } from 'react';
 import { IoPersonOutline } from 'react-icons/io5';
 import { IoIosMenu } from 'react-icons/io';
-import { Button } from 'reactstrap';
 import Loginmodal from "./Login/Loginmodal";
 
 export default function Navbar({ isLoggedIn, onLogout, onLoginClick }) {
   // 모달 상태 관리
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   // 메뉴 상태 관리
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // 모달 열기
   const openModal = () => {
+    console.log("Opening login modal");
     setIsModalOpen(true);
   };
 
   // 모달 닫기
   const closeModal = () => {
+    console.log("Closing login modal");
     setIsModalOpen(false);
   };
 
   // 메뉴 열기/닫기
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const closeMenu = () => setIsMenuOpen(false);
-  
+  const toggleMenu = () => {
+    console.log("Toggling menu");
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    console.log("Closing menu");
+    setIsMenuOpen(false);
+  };
 
   return (
     <div>
@@ -33,20 +38,19 @@ export default function Navbar({ isLoggedIn, onLogout, onLoginClick }) {
       <div className='login-btn'>
         <IoPersonOutline />
         {isLoggedIn ? (
-          <Button color="danger" onClick={onLogout}>로그아웃</Button>
+          <button onClick={onLogout} className='auth-btn'>로그아웃</button>
         ) : (
-          <div onClick={onLoginClick} className='login'>로그인</div>
+          <button onClick={onLoginClick} className='auth-btn'>로그인</button>
         )}
-        {/* <div onClick={openModal} className='login'>로그인</div> */}
       </div>
-      
+
       {/* 헤더 */}
       <div className='header'>
         <h1 className='title'>골든타임⏱</h1>
-        <div className='menu-area'> 
+        <div className='menu-area'>
           <button className="menu-button"
                   onClick={toggleMenu}
-                  style={{ width: '40px', height:'40px' }}
+                  style={{ width: '40px', height: '40px' }}
           >
             <IoIosMenu />
           </button>

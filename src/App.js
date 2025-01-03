@@ -18,8 +18,12 @@ function App() {
 
   // 로그아웃 시 상태 변경
   const handleLogout = () => {
+    sessionStorage.removeItem("jwtToken");
+    sessionStorage.removeItem("username");
     setIsLoggedIn(false);
     sessionStorage.clear();
+
+    console.log("logout");
   };
 
   return (
