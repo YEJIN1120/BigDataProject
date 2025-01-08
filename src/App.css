@@ -9,13 +9,18 @@
 .menu-area{
   position: absolute;
   right: 5px;
-  top: 50%;
+  top: 40%;
   transform: translateY(-50%);
 }
 
 .title{
-  font-size: 2.2rem;
-  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+}
+
+.title h1 {
+  cursor: pointer;
+  font-size: 30px;
 }
 
 .login-btn{

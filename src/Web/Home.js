@@ -87,7 +87,7 @@ export default function Home() {
         padding: "20px",
       }}
     >
-      <div style={{ textAlign: "center", marginTop: "30px" }}>
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
         <h2 style={{ marginBottom: "5px" }}>응급실 실시간 정보</h2>
         <p style={{ fontSize: "18px", fontWeight: "bold", marginTop: "5px" }}>{currentTime}</p>
       </div>
@@ -144,19 +144,18 @@ export default function Home() {
 
       {hospitalList.length > 0 && (
         <div style={{ marginTop: "40px" }}>
-          <h3>병원 목록</h3>
           <table style={{ borderCollapse: "collapse", width: "100%", maxWidth: "600px", margin: "0 auto", tableLayout: "fixed" }}>
             <thead>
               <tr>
-                <th style={{ border: "1px solid #ddd", padding: "8px", width: "50%", textAlign: "left" }}>의료기관명</th>
-                <th style={{ border: "1px solid #ddd", padding: "8px", width: "50%", textAlign: "left" }}>주소</th>
+                <th style={{ border: "1px solid #ddd", padding: "8px", width: "50%", textAlign: "left", backgroundColor: "#f4f4f4" }}>의료기관명</th>
+                <th style={{ border: "1px solid #ddd", padding: "8px", width: "50%", textAlign: "left", backgroundColor: "#f4f4f4" }}>주소</th>
               </tr>
             </thead>
             <tbody>
               {hospitalList.map((hospital) => (
                 <tr key={hospital.id}>
                   <td style={{ border: "1px solid #ddd", padding: "8px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    <Link to={`/hospital/${hospital.hpid}`} style={{ color: "blue", textDecoration: "none" }}>
+                    <Link to={`/hospital/${hospital.hpid}`} style={{ color: "black", textDecoration: "none" }}>
                       {hospital.dutyname}
                     </Link>
                   </td>

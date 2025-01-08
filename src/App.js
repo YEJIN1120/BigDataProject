@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Web/Home";
 import Navbar from "./Web/Navbar";
-import Loginmodal from './Web/Login/Loginmodal';
+import LoginPage from "./Web/LoginPage";
 import HospitalDetail from './Web/HospitalDetail';
+import Community from './Web/Community';
 import './App.css';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!sessionStorage.getItem("jwtToken")); // 초기 로그인 상태
 
   // 로그인 성공 시 상태 변경
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
-    setIsModalOpen(false);
   }
 
   // 로그아웃 시 상태 변경
@@ -27,15 +26,25 @@ function App() {
   };
 
   return (
-    // <div style={{padding:'0 300px'}}>
-    <div className="w-full h-full flex flex-col justify-start items-center">
-      <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} onLoginClick={() => setIsModalOpen(true)} />
-      <Loginmodal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onLoginSuccess={handleLoginSuccess} />
+      <div className="w-full h-full flex flex-col justify-start items-center" style={{ paddingLeft: '30px', paddingRight: '30px' }}>
+        <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
         <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path="/hospital/:hpid" element={<HospitalDetail />} />
+          {/* 홈 페이지: 로그인 여부에 따라 접근 제한 */}
+          <Route path='/' element={isLoggedIn ? <Home /> : <Navigate to="/login" />} />
+
+          {/* 병원 상세 페이지: 로그인 여부에 따라 접근 제한 */}
+          <Route path="/hospital/:hpid"
+            element={isLoggedIn ? <HospitalDetail /> : <Navigate to="/login" />} />
+
+          {/* 로그인 페이지 */}
+          <Route path="/login"
+            element={isLoggedIn ? <Navigate to="/" /> : <LoginPage onLoginSuccess={handleLoginSuccess} />} />
+
+          {/* 커뮤니티 페이지 */}
+          <Route path="/community" 
+                 element={isLoggedIn ? <Community /> : <Navigate to="/login" />} />
         </Routes>
-    </div>
+      </div>
   );
 }
 
