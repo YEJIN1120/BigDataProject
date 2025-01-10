@@ -1,105 +1,250 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Community() {
-  const [hospitalList, setHospitalList] = useState([]);
-  const [selectedHospital, setSelectedHospital] = useState('');
-  const [postContent, setPostContent] = useState('');
+  const navigate = useNavigate(); // 페이지 이동을 위한 훅
+
+  // 게시글 테스트 데이터 (No, 병원, 제목, 작성자, 게시글 작성 날짜)
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [searchTerm, setSearchTerm] = useState(""); // 검색창 입력 상태
+  const [appliedSearchTerm, setAppliedSearchTerm] = useState(""); // 검색 버튼 클릭 후 실제 적용된 검색어
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
+  const postsPerPage = 10; // 페이지당 게시글 수
 
-  
-
-
-  
-  // 병원 목록 API 호출
+  // 게시물 목록 전체 가져오기
   useEffect(() => {
-    const fetchHospitalList = async () => {
+    const fetchPosts = async () => {
       try {
-        const response = await fetch(`http://10.125.121.222:8080/api/list`);
+        const response = await fetch("http://10.125.121.222:8080/api/board/");
         if (!response.ok) {
-          throw new Error('병원 목록을 가져오는 데 실패했습니다.');
+          throw new Error("Failed to fetch posts");
         }
+
         const data = await response.json();
-        setHospitalList(data); // 병원 목록 상태 업데이트
+        console.log("Fetched Posts:", data);
+        setPosts(data); // DB에서 가져온 게시물 목록 설정
       } catch (error) {
-        setError(error.message); // 오류 상태 설정
-      } finally {
-        setLoading(false); // 로딩 상태 종료
+        console.error("Error fetching posts:", error);
       }
     };
 
-    fetchHospitalList();
+    fetchPosts();
   }, []);
 
-  // 게시글 작성 핸들러
-  const handlePostSubmit = (e) => {
-    e.preventDefault();
-    if (selectedHospital && postContent) {
-      setPosts([
-        ...posts,
-        { hospital: selectedHospital, content: postContent, date: new Date().toLocaleString() },
-      ]);
-      setPostContent(''); // 작성 후 입력란 초기화
-    } else {
-      alert('병원과 게시글 내용을 모두 입력해주세요.');
+  // 검색어에 따른 게시글 필터링
+  const filteredPosts = posts.filter((post) => {
+    if (post.dutyname && appliedSearchTerm) {
+      return post.dutyname.toLowerCase().includes(appliedSearchTerm.toLowerCase());
     }
+    return true; // 검색어가 없을 경우 모든 게시글을 표시
+  });
+
+  // No 값을 기준으로 내림차순 정렬
+  const sortedPosts = [...filteredPosts].sort((a, b) => b.id - a.id);
+
+  // 총 페이지 수 계산
+  const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
+
+  // 현재 페이지에 표시할 게시글
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // 페이지 변경 함수
+  const handlePageChange = (pageNumber) => {
+    const newPage = Math.max(1, Math.min(pageNumber, totalPages));
+    setCurrentPage(newPage);
   };
 
+  // 검색어 입력 핸들러
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // 검색 버튼 클릭 핸들러
+  const handleSearchClick = () => {
+    setAppliedSearchTerm(searchTerm); // 검색 버튼 클릭 시 적용
+    setCurrentPage(1); // 검색 결과가 갱신되면 첫 페이지로 초기화
+  };
+
+  // 게시글 클릭 시 상세 페이지로 이동
+  const handlePostClick = (id) => {
+    navigate(`/post/${id}`); // 해당 게시물 상세 페이지로 이동
+  }
+
+
   return (
-    <div>
-      <h1>병원 커뮤니티</h1>
-
-      {/* 병원 목록 로딩 상태 */}
-      {loading && <p>병원 목록을 불러오는 중...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-
-      {/* 병원 선택 */}
-      {!loading && !error && (
-        <div>
-          <label htmlFor="hospital">병원 선택: </label>
-          <select
-            id="hospital"
-            value={selectedHospital}
-            onChange={(e) => setSelectedHospital(e.target.value)}
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", width: "100%" }}>
+      <div style={{ width: "70%", marginTop: "10px" }}>
+        {/* 검색창과 버튼 */}
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "20px", marginBottom: "20px" }}>
+          <input
+            type="text"
+            placeholder="병원 이름으로 검색하세요"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            style={{
+              padding: "10px 15px",
+              border: "1px solid #ddd",
+              borderRadius: "2px",
+              marginRight: "5px",
+              width: "300px",
+              fontSize: "15px",
+            }}
+          />
+          <button
+            onClick={handleSearchClick}
+            style={{
+              padding: "10px 15px",
+              borderRadius: "2px",
+              backgroundColor: "black",
+              color: "white",
+              border: "none",
+              cursor: "pointer",
+              fontSize: "15px",
+            }}
           >
-            <option value="">병원 선택</option>
-            {hospitalList.map((hospital) => (
-              <option key={hospital.id} value={hospital.name}>
-                {hospital.name}
-              </option>
-            ))}
-          </select>
+            검색
+          </button>
         </div>
-      )}
 
-      {/* 게시글 작성 */}
-      <div>
-        <textarea
-          value={postContent}
-          onChange={(e) => setPostContent(e.target.value)}
-          placeholder="게시글을 작성하세요."
-          rows="5"
-          style={{ width: '100%' }}
-        />
-        <button onClick={handlePostSubmit}>게시글 작성</button>
-      </div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0px" }}>
+          <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>게시판</h2>
+          <button
+            style={{
+              padding: "5px 10px",
+              backgroundColor: "white",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+            onClick={() => navigate('/post')}
+          >
+            글쓰기
+          </button>
+        </div>
 
-      {/* 게시글 목록 */}
-      <div>
-        <h2>게시글 목록</h2>
-        {posts.length === 0 ? (
-          <p>게시글이 없습니다.</p>
+        {posts.length > 0 ? (
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
+            <thead>
+              <tr>
+                <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center" }}>No</th>
+                <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center" }}>병원</th>
+                <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center" }}>제목</th>
+                <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center" }}>작성자</th>
+                <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center" }}>작성 날짜</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentPosts.length > 0 ? (
+                currentPosts.map((post, index) => (
+                  <tr key={index}>
+                    <td style={{ borderBottom: "1px solid #ddd", padding: "8px", textAlign: "center" }}>{post.id}</td>
+                    <td 
+                      style={{ 
+                        borderBottom: "1px solid #ddd", 
+                        padding: "8px", 
+                        textAlign: "center",
+                        cursor: "pointer", 
+                      }}
+                      onClick={() => handlePostClick(post.id)}
+                    >
+                      {post.dutyname}</td>
+                    <td style={{
+                       borderBottom: "1px solid #ddd", 
+                       padding: "8px", 
+                       textAlign: "center",
+                       cursor: "pointer", 
+                      }}
+                      onClick={() => handlePostClick(post.id)}
+                    >
+                      {post.title}</td>
+                    <td style={{ borderBottom: "1px solid #ddd", padding: "8px", textAlign: "center" }}>{post.username}</td>
+                    <td style={{ borderBottom: "1px solid #ddd", padding: "8px", textAlign: "center" }}>{post.createDate}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" style={{ textAlign: "center" }}>현재 페이지에 표시할 게시글이 없습니다.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         ) : (
-          <ul>
-            {posts.map((post, index) => (
-              <li key={index}>
-                <strong>{post.hospital}</strong> ({post.date})<br />
-                <p>{post.content}</p>
-              </li>
-            ))}
-          </ul>
+          <p>게시글이 없습니다.</p>
         )}
+
+        {/* 페이징 버튼 */}
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "20px", alignItems: "center" }}>
+          <button
+            onClick={() => handlePageChange(1)}
+            style={{
+              margin: "0 5px",
+              padding: "5px 10px",
+              borderRadius: "3px",
+              backgroundColor: "white",
+              border: "1px solid #ddd",
+              cursor: "pointer",
+            }}
+          >
+            {"<<"}
+          </button>
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            style={{
+              margin: "0 5px",
+              padding: "5px 10px",
+              borderRadius: "3px",
+              backgroundColor: "white",
+              border: "1px solid #ddd",
+              cursor: "pointer",
+            }}
+          >
+            {"<"}
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
+            <button
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              style={{
+                margin: "0 5px",
+                padding: "5px 10px",
+                borderRadius: "3px",
+                backgroundColor: currentPage === pageNumber ? "black" : "white",
+                color: currentPage === pageNumber ? "white" : "black",
+                border: "1px solid #ddd",
+                cursor: "pointer",
+              }}
+            >
+              {pageNumber}
+            </button>
+          ))}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            style={{
+              margin: "0 5px",
+              padding: "5px 10px",
+              borderRadius: "3px",
+              backgroundColor: "white",
+              border: "1px solid #ddd",
+              cursor: "pointer",
+            }}
+          >
+            {">"}
+          </button>
+          <button
+            onClick={() => handlePageChange(totalPages)}
+            style={{
+              margin: "0 5px",
+              padding: "5px 10px",
+              borderRadius: "3px",
+              backgroundColor: "white",
+              border: "1px solid #ddd",
+              cursor: "pointer",
+            }}
+          >
+            {">>"}
+          </button>
+        </div>
       </div>
     </div>
   );

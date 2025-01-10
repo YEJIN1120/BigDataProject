@@ -3,7 +3,7 @@ import { IoPersonOutline } from 'react-icons/io5';
 import { IoIosMenu } from 'react-icons/io';
 import { useLocation, Link } from 'react-router-dom';
 
-export default function Navbar({ hpid, onLogout }) {
+export default function Navbar({ onLogout }) {
   // 메뉴 상태 관리
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 

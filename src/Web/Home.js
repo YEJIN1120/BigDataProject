@@ -59,7 +59,6 @@ export default function Home() {
       .catch((error) => console.error("Error fetching addr2:", error));
   };
 
-  // 병원 정보 가져오기
   const handleSearchClick = () => {
     if (!selectedAddr1 || !selectedAddr2) {
       alert("지역을 선택해주세요.");
@@ -77,7 +76,7 @@ export default function Home() {
   };
 
   return (
-    <div
+    <div className='Home-header'
       style={{
         display: "flex",
         flexDirection: "column",
@@ -87,6 +86,8 @@ export default function Home() {
         padding: "20px",
       }}
     >
+      <div className='header-image'></div>
+
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <h2 style={{ marginBottom: "5px" }}>응급실 실시간 정보</h2>
         <p style={{ fontSize: "18px", fontWeight: "bold", marginTop: "5px" }}>{currentTime}</p>
@@ -96,7 +97,7 @@ export default function Home() {
           <select
             onChange={handleAddr1Change}
             value={selectedAddr1}
-            style={{ padding: "8px", fontSize: "16px", width: "200px", textAlign: "center" }}
+            style={{ padding: "8px", fontSize: "16px", width: "300px", textAlign: "center" }}
           >
             <option value="">== 시도 ==</option>
             {addr1List.map((addr1, index) => (
@@ -111,7 +112,7 @@ export default function Home() {
           <select
             onChange={(e) => setSelectedAddr2(e.target.value)}
             value={selectedAddr2}
-            style={{ padding: "8px", fontSize: "16px", width: "200px", textAlign: "center" }}
+            style={{ padding: "8px", fontSize: "16px", width: "250px", textAlign: "center" }}
           >
             <option value="">== 시군구 ==</option>
             {addr2List.map((addr2, index) => (
@@ -129,7 +130,7 @@ export default function Home() {
           style={{
             padding: "10px",
             fontSize: "15px",
-            width: "420px",
+            width: "400px",
             textAlign: "center",
             cursor: "pointer",
             backgroundColor: "darkred",
@@ -147,15 +148,15 @@ export default function Home() {
           <table style={{ borderCollapse: "collapse", width: "100%", maxWidth: "600px", margin: "0 auto", tableLayout: "fixed" }}>
             <thead>
               <tr>
-                <th style={{ border: "1px solid #ddd", padding: "8px", width: "50%", textAlign: "left", backgroundColor: "#f4f4f4" }}>의료기관명</th>
-                <th style={{ border: "1px solid #ddd", padding: "8px", width: "50%", textAlign: "left", backgroundColor: "#f4f4f4" }}>주소</th>
+                <th style={{ border: "1px solid #ddd", padding: "8px", width: "100%", textAlign: "left", backgroundColor: "#f4f4f4" }}>의료기관명</th>
+                <th style={{ border: "1px solid #ddd", padding: "8px", width: "200%", textAlign: "left", backgroundColor: "#f4f4f4" }}>주소</th>
               </tr>
             </thead>
             <tbody>
               {hospitalList.map((hospital) => (
                 <tr key={hospital.id}>
-                  <td style={{ border: "1px solid #ddd", padding: "8px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    <Link to={`/hospital/${hospital.hpid}`} style={{ color: "black", textDecoration: "none" }}>
+                  <td style={{ border: "1px solid #ddd", padding: "8px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", color:"blue" }}>
+                    <Link to={`/hospital/${hospital.hpid}`} style={{ color: "blue", textDecoration: "none" }}>
                       {hospital.dutyname}
                     </Link>
                   </td>

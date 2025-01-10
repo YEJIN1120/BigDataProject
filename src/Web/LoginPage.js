@@ -55,7 +55,7 @@ export default function LoginPage({ onLoginSuccess }) {
         <h2 className={styles.header}>로그인</h2>
         <Form onSubmit={handleSubmit} className={styles.form}>
           <FormGroup className={styles.formGroup}>
-            <Label className={styles.label} for="userId">ID</Label>
+            {/* <Label className={styles.label} for="userId">ID</Label> */}
             <Input
               className={styles.input}
               id="userId"
@@ -66,7 +66,7 @@ export default function LoginPage({ onLoginSuccess }) {
             />
           </FormGroup>
           <FormGroup className={styles.formGroup}>
-            <Label className={styles.label} for="password">PW</Label>
+            {/* <Label className={styles.label} for="password">PW</Label> */}
             <Input
               className={styles.input}
               id="password"

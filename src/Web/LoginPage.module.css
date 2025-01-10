@@ -5,6 +5,96 @@
   align-items: center;
   height: 100vh;
   background-color: white;
+
+ 
+
+  background-image: url('../IMG/1199.svg'), linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)); 
+  /* , linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)) */
+  /* 배경 이미지와 반투명 검정색 겹치기 */ /* 배경에 사용할 이미지 경로 */
+  /* background-size: cover;  */
+  /* 배경 이미지를 화면에 맞게 조정 */
+  background-position: center 20% ;
+   /* 배경 이미지가 화면 중앙에 오도록 설정 */
+  background-repeat: no-repeat; 
+  /* 배경 이미지가 반복되지 않도록 설정 */
+  
+  
+}
+
+
+.loginContainer{
+
+  
+  
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 70%;
+  max-width: 250px;
+  border: 2px solid #ccc;
+}
+
+.header{
+  margin-top: -5px;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: rgb(255, 252, 252);
+}
+
+.formGroup{
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.label{
+  font-weight: bold;
+  margin-right: 10px;
+  width: 30px;
+}
+
+.input{
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-bottom: 1px solid #cacaca;
+  /* border-radius: 5px; */
+  font-size: 16px;
+  /* box-sizing: border-box; */
+}
+
+.loginbutton{
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #857d7d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.loginbutton:hover{
+  background-color: #d60000;
+}
+
+
+
+
+
+/* src/Web/LoginPage.module.css
+.loginPage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
 }
 
 .loginContainer{
@@ -61,7 +151,7 @@
 
 .loginbutton:hover{
   background-color: #d60000;
-}
+} */
 
 /* .modal{
   position: fixed;
