@@ -116,7 +116,7 @@ export default function PostDetailPage() {
   };
 
   return (
-    <div style={{ width: "50%", margin: "auto", padding: "20px", backgroundColor: "#f9f9f9", borderRadius: "10px" }}>
+    <div style={{ width: "50%", margin: "auto", marginTop: "80px", padding: "20px", borderRadius: "10px" }}>
       {loading && <p>게시글 정보를 불러오는 중...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
 

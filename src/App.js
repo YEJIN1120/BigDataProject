@@ -28,7 +28,7 @@ function App() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col justify-start items-center" style={{ paddingLeft: '30px', paddingRight: '30px' }}>
+    <div className="w-full h-full flex flex-col justify-start items-center"> 
       <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
       <Routes>
         {/* 홈 페이지: 로그인 여부에 따라 접근 제한 */}

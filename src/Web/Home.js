@@ -97,7 +97,7 @@ export default function Home() {
           <select
             onChange={handleAddr1Change}
             value={selectedAddr1}
-            style={{ padding: "8px", fontSize: "16px", width: "300px", textAlign: "center" }}
+            style={{ padding: "8px", fontSize: "16px", width: "330px", textAlign: "center" }}
           >
             <option value="">== 시도 ==</option>
             {addr1List.map((addr1, index) => (
@@ -112,7 +112,7 @@ export default function Home() {
           <select
             onChange={(e) => setSelectedAddr2(e.target.value)}
             value={selectedAddr2}
-            style={{ padding: "8px", fontSize: "16px", width: "250px", textAlign: "center" }}
+            style={{ padding: "8px", fontSize: "16px", width: "330px", textAlign: "center" }}
           >
             <option value="">== 시군구 ==</option>
             {addr2List.map((addr2, index) => (
@@ -122,15 +122,12 @@ export default function Home() {
             ))}
           </select>
         </div>
-      </div>
-
-      <div style={{ marginTop: "20px" }}>
         <button
           onClick={handleSearchClick}
           style={{
             padding: "10px",
             fontSize: "15px",
-            width: "400px",
+            width: "300px",
             textAlign: "center",
             cursor: "pointer",
             backgroundColor: "darkred",
@@ -145,7 +142,7 @@ export default function Home() {
 
       {hospitalList.length > 0 && (
         <div style={{ marginTop: "40px" }}>
-          <table style={{ borderCollapse: "collapse", width: "100%", maxWidth: "600px", margin: "0 auto", tableLayout: "fixed" }}>
+          <table style={{ borderCollapse: "collapse", width: "100%", maxWidth: "1000px", margin: "0 auto", tableLayout: "fixed" }}>
             <thead>
               <tr>
                 <th style={{ border: "1px solid #ddd", padding: "8px", width: "100%", textAlign: "left", backgroundColor: "#f4f4f4" }}>의료기관명</th>

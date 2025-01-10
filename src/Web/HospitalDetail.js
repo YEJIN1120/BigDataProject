@@ -193,7 +193,7 @@ export default function HospitalDetail() {
             <strong>대표전화:</strong> {hospitalDetail.dutytel1}
           </p>
           <p className="info">
-            <strong>응급실 전화:</strong> {hospitalDetail.dutytel3}
+            <strong style={{ color: "red", fontWeight: "bolder"}}>응급실 전화: {hospitalDetail.dutytel3}</strong>
           </p>
         </div>
       )}
@@ -240,8 +240,8 @@ export default function HospitalDetail() {
           >
             <thead>
               <tr>
-                <th style={{ padding: "8px", backgroundColor: "#f4f4f4" }}>항목</th>
-                <th style={{ padding: "8px", backgroundColor: "#f4f4f4" }}>상태</th>
+                <th style={{ padding: "8px", color: "#777" }}>항목</th>
+                <th style={{ padding: "8px", color: "#777" }}>상태</th>
               </tr>
             </thead>
             <tbody>
@@ -264,8 +264,8 @@ export default function HospitalDetail() {
                 return (
                   <React.Fragment key={index}>
                     <tr>
-                      <td style={{ padding: "8px" }}>데이터 기준시간</td>
-                      <td style={{ padding: "8px" }}>{formattedDate}</td>
+                      <td style={{ padding: "8px", backgroundColor: "#f4f4f4", color: "#777", fontWeight: "bold" }}>데이터 기준시간</td>
+                      <td style={{ padding: "8px", backgroundColor: "#f4f4f4", color: "#777" }}>{formattedDate}</td>
                     </tr>
                     {[
                       { label: '응급실전화', value: item.dutyTel3 || '정보없음' },
@@ -297,8 +297,8 @@ export default function HospitalDetail() {
                       { label: '소아당직의 연락처', value: item.hv12 || '정보없음' },
                     ].map((row, i) => (
                       <tr key={i}>
-                        <td style={{ padding: "8px" }}>{row.label}</td>
-                        <td style={{ padding: "8px" }}>{row.value}</td>
+                        <td style={{ padding: "8px", backgroundColor: i % 2 === 1 ? "#f4f4f4" : "transparent", color: "#777", fontWeight: "bold" }}>{row.label}</td>
+                        <td style={{ padding: "8px", backgroundColor: i % 2 === 1 ? "#f4f4f4" : "transparent", color: "#777" }}>{row.value}</td>
                       </tr>
                     ))}
                   </React.Fragment>
@@ -323,8 +323,8 @@ export default function HospitalDetail() {
           >
             <thead>
               <tr>
-                <th style={{ padding: "8px", backgroundColor: "#f4f4f4" }}>항목</th>
-                <th style={{ padding: "8px", backgroundColor: "#f4f4f4" }}>가능여부</th>
+                <th style={{ padding: "8px", color: "#777" }}>항목</th>
+                <th style={{ padding: "8px", color: "#777" }}>가능여부</th>
               </tr>
             </thead>
             <tbody>
@@ -342,8 +342,8 @@ export default function HospitalDetail() {
                 { label: '중증화상', value: hospitalDetail.mkioskty11 },
               ].map((row, i) => (
                 <tr key={i}>
-                  <td style={{ padding: "8px" }}>{row.label}</td>
-                  <td style={{ padding: "8px" }}>{row.value ? YorN[row.value.substring(0, 1)] : '0'}</td>
+                  <td style={{ padding: "8px", backgroundColor: i % 2 === 0 ? "#f4f4f4" : "transparent", color: "#777", fontWeight: "bold" }}>{row.label}</td>
+                  <td style={{ padding: "8px", backgroundColor: i % 2 === 0 ? "#f4f4f4" : "transparent", color: "#777" }}>{row.value ? YorN[row.value.substring(0, 1)] : '0'}</td>
                 </tr>
               ))}
             </tbody>
@@ -365,10 +365,10 @@ export default function HospitalDetail() {
           >
             <thead>
               <tr>
-                <th style={{ padding: "8px", width:"30px", backgroundColor: "#f4f4f4", width: "30px"}}>구분</th>
-                <th style={{ padding: "8px", width:"45px", backgroundColor: "#f4f4f4", width: "45px" }}>항목</th>
-                <th style={{ padding: "8px", backgroundColor: "#f4f4f4" }}>불가 메시지</th>
-                <th style={{ padding: "8px", backgroundColor: "#f4f4f4" }}>날짜</th>
+                <th style={{ padding: "8px", width:"30px", color: "#777", width: "30px"}}>구분</th>
+                <th style={{ padding: "8px", width:"45px",  color: "#777", width: "45px" }}>항목</th>
+                <th style={{ padding: "8px",  color: "#777" }}>불가 메시지</th>
+                <th style={{ padding: "8px",  color: "#777" }}>날짜</th>
               </tr>
             </thead>
             <tbody>
@@ -397,10 +397,10 @@ export default function HospitalDetail() {
 
                 return (
                   <tr key={index}>
-                    <td style={{ padding: "8px", width: "30px" }}>{info.symBlkMsgTyp}</td>
-                    <td style={{ padding: "8px", width: "45px" }}>{info.symTypCod}</td>
-                    <td style={{ padding: "8px" }}>{info.symBlkMsg}</td>
-                    <td style={{ padding: "8px" }}>{formattedStartDate} ~ {formattedEndDate}</td>
+                    <td style={{ padding: "8px", width: "30px", backgroundColor: index % 2 === 0 ? "#f4f4f4" : "transparent", color: "#777" }}>{info.symBlkMsgTyp}</td>
+                    <td style={{ padding: "8px", width: "45px", backgroundColor: index % 2 === 0 ? "#f4f4f4" : "transparent", color: "#777" }}>{info.symTypCod}</td>
+                    <td style={{ padding: "8px", backgroundColor: index % 2 === 0 ? "#f4f4f4" : "transparent", color: "#777" }}>{info.symBlkMsg}</td>
+                    <td style={{ padding: "8px", backgroundColor: index % 2 === 0 ? "#f4f4f4" : "transparent", color: "#777" }}>{formattedStartDate} ~ {formattedEndDate}</td>
                   </tr>
                 );
               })}

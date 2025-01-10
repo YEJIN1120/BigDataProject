@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { IoPersonOutline } from 'react-icons/io5';
 import { IoIosMenu } from 'react-icons/io';
 import { useLocation, Link } from 'react-router-dom';
 
@@ -27,25 +26,27 @@ export default function Navbar({ onLogout }) {
 
   return (
     <div>
-      {/* 로그인/로그아웃 버튼 */}
-      <div className='login-btn'>
-        <IoPersonOutline />
-          <button onClick={onLogout} className='auth-btn'>로그아웃</button>
-      </div>
+      <div className='headlogout'>
+        {/* 로그인/로그아웃 버튼 */}
+        <div className='login-btn'>
+          <button onClick={onLogout}
+            className='auth-btn'>로그아웃</button>
+        </div>
 
-      {/* 헤더 */}
-      <div className='header'>
-        {/* title을 클릭하면 홈 화면으로 이동 */}
-        <Link to="/" className='title'>
-          <h1>골든타임⏱</h1>
-        </Link>
-        <div className='menu-area'>
-          <button className="menu-button"
-                  onClick={toggleMenu}
-                  style={{ width: '40px', height: '40px' }}
-          >
-            <IoIosMenu />
-          </button>
+        {/* 헤더 */}
+        <div className='header'>
+          {/* title을 클릭하면 홈 화면으로 이동 */}
+          <Link to="/" className='title'>
+            <h1>골든타임⏱</h1>
+          </Link>
+          <div className='menu-area'>
+            <button className="menu-button"
+              onClick={toggleMenu}
+              style={{ width: '40px', height: '40px', background: '#f4f4f4', }}
+            >
+              <IoIosMenu />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -54,7 +55,7 @@ export default function Navbar({ onLogout }) {
       <div className={`side-menu ${isMenuOpen ? "open" : ""}`}>
         <ul>
           <li>
-            <Link to="/" onClick={closeMenu} style={{ textDecoration: 'none', color: 'inherit'}}>HOME</Link>
+            <Link to="/" onClick={closeMenu} style={{ textDecoration: 'none', color: 'inherit' }}>HOME</Link>
           </li>
           <li>
             <Link to="/community" onClick={closeMenu} style={{ textDecoration: 'none', color: 'inherit' }}>

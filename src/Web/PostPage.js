@@ -193,7 +193,7 @@ export default function PostPage() {
           <select
             onChange={handleAddr1Change}
             value={selectedAddr1}
-            style={{ padding: "8px", fontSize: "16px", width: "230px", textAlign: "center", marginLeft: "45px" }}
+            style={{ padding: "8px", fontSize: "16px", width: "229px", textAlign: "center", marginLeft: "45px", borderRadius: "4px",}}
           >
             <option value="">== 시도 ==</option>
             {addr1List.map((addr1, index) => (
@@ -206,7 +206,7 @@ export default function PostPage() {
           <select
             onChange={(e) => setSelectedAddr2(e.target.value)}
             value={selectedAddr2}
-            style={{ padding: "8px", fontSize: "16px", width: "230px", textAlign: "center" }}
+            style={{ padding: "8px", fontSize: "16px", width: "229px", textAlign: "center", borderRadius: "4px", }}
           >
             <option value="">== 시군구 ==</option>
             {addr2List.map((addr2, index) => (
@@ -229,6 +229,7 @@ export default function PostPage() {
               color: "white",
               border: "none",
               borderRadius: "4px",
+              marginRight: "3px"
             }}
           >
             검색
@@ -245,11 +246,11 @@ export default function PostPage() {
               value={selectedHospital}
               onChange={(e) => setSelectedHospital(e.target.value)}
               style={{
-                width: "300px",
+                width: "622px",
                 height: "35px",
                 textAlign: "center",
                 fontSize: "16px",
-                marginTop: "50px",
+                marginTop: "15px",
                 marginBottom: "10px",
                 borderRadius: "4px",
               }}
@@ -304,9 +305,8 @@ export default function PostPage() {
                 onClick={handlePostSubmit}
                 style={{
                   position: "absolute",
-                  bottom: "-30px",
                   right: "-23px",
-                  padding: "7px 13px",
+                  padding: "5px 10px",
                   backgroundColor: "black",
                   color: "white",
                   border: "none",
@@ -315,7 +315,21 @@ export default function PostPage() {
                 }}
               >
                 등록
+
               </button>
+              <button
+                  onClick={() => navigate('/community')}
+                  style={{
+                    padding: "5px 10px", 
+                    background: "black", 
+                    color: "white", 
+                    border: "none", 
+                    borderRadius: "5px", 
+                    cursor: "pointer",
+                  }}
+                >
+                  목록
+                </button>
             </div>
           </div>
         </div>

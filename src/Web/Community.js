@@ -76,99 +76,115 @@ export default function Community() {
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", width: "100%" }}>
       <div style={{ width: "70%", marginTop: "10px" }}>
-        {/* 검색창과 버튼 */}
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "20px", marginBottom: "20px" }}>
-          <input
-            type="text"
-            placeholder="병원 이름으로 검색하세요"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            style={{
-              padding: "10px 15px",
-              border: "1px solid #ddd",
-              borderRadius: "2px",
-              marginRight: "5px",
-              width: "300px",
-              fontSize: "15px",
-            }}
-          />
-          <button
-            onClick={handleSearchClick}
-            style={{
-              padding: "10px 15px",
-              borderRadius: "2px",
-              backgroundColor: "black",
-              color: "white",
-              border: "none",
-              cursor: "pointer",
-              fontSize: "15px",
-            }}
-          >
-            검색
-          </button>
-        </div>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", marginTop: "50px" }}>
+          {/* 게시판 */}
+          <div style={{ flexGrow: 1, textAlign: "center", marginRight: "20px" }}>
+            <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>커뮤니티</h2>
+          </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0px" }}>
-          <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>게시판</h2>
-          <button
-            style={{
-              padding: "5px 10px",
-              backgroundColor: "white",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-            onClick={() => navigate('/post')}
-          >
-            글쓰기
-          </button>
+          {/* 검색창과 버튼 */}
+          <div style={{ display: "flex", alignItems: "center", marginRight: "20px" }}>
+            <input
+              type="text"
+              placeholder="병원 이름으로 검색하세요"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              style={{
+                padding: "10px 15px",
+                border: "1px solid #ddd",
+                borderRadius: "2px",
+                marginRight: "5px",
+                width: "300px",
+                fontSize: "15px",
+              }}
+            />
+            <button
+              onClick={handleSearchClick}
+              style={{
+                padding: "10px 15px",
+                borderRadius: "2px",
+                backgroundColor: "black",
+                color: "white",
+                border: "none",
+                cursor: "pointer",
+                fontSize: "15px",
+              }}
+            >
+              검색
+            </button>
+          </div>
+
+          {/* 글쓰기 버튼 */}
+          <div style={{ flexGrow: 1, textAlign: "center" }}>
+            <button
+              style={{
+                padding: "5px 10px",
+                backgroundColor: "white",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
+              onClick={() => navigate('/post')}
+            >
+              글쓰기
+            </button>
+          </div>
         </div>
 
         {posts.length > 0 ? (
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
-            <thead>
-              <tr>
-                <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center" }}>No</th>
-                <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center" }}>병원</th>
-                <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center" }}>제목</th>
-                <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center" }}>작성자</th>
-                <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center" }}>작성 날짜</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentPosts.length > 0 ? (
-                currentPosts.map((post, index) => (
-                  <tr key={index}>
-                    <td style={{ borderBottom: "1px solid #ddd", padding: "8px", textAlign: "center" }}>{post.id}</td>
-                    <td 
-                      style={{ 
-                        borderBottom: "1px solid #ddd", 
-                        padding: "8px", 
-                        textAlign: "center",
-                        cursor: "pointer", 
-                      }}
-                      onClick={() => handlePostClick(post.id)}
-                    >
-                      {post.dutyname}</td>
-                    <td style={{
-                       borderBottom: "1px solid #ddd", 
-                       padding: "8px", 
-                       textAlign: "center",
-                       cursor: "pointer", 
-                      }}
-                      onClick={() => handlePostClick(post.id)}
-                    >
-                      {post.title}</td>
-                    <td style={{ borderBottom: "1px solid #ddd", padding: "8px", textAlign: "center" }}>{post.username}</td>
-                    <td style={{ borderBottom: "1px solid #ddd", padding: "8px", textAlign: "center" }}>{post.createDate}</td>
-                  </tr>
-                ))
-              ) : (
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+            <table style={{ width: "1000px", justifyContent: "center", alignItems: "center", tableLayout: "fixed", }}>
+              <thead>
                 <tr>
-                  <td colSpan="5" style={{ textAlign: "center" }}>현재 페이지에 표시할 게시글이 없습니다.</td>
+                  <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center", }}>No</th>
+                  <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center", }}>병원</th>
+                  <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center", }}>제목</th>
+                  <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center", }}>작성자</th>
+                  <th style={{ borderBottom: "2px solid #ddd", borderTop: "2px solid black", padding: "8px", textAlign: "center", }}>작성 날짜</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {currentPosts.length > 0 ? (
+                  currentPosts.map((post, index) => {
+                    const displayNo = posts.length - (indexOfFirstPost + index); // 총 게시글 수에서 현재 게시글 순서 계산
+
+                    return (
+                      <tr key={index}>
+                        <td style={{ borderBottom: "1px solid #ddd", padding: "8px", textAlign: "center" }}>{displayNo}</td>
+                        <td
+                          style={{
+                            borderBottom: "1px solid #ddd",
+                            padding: "8px",
+                            textAlign: "center",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handlePostClick(post.id)}
+                        >
+                          {post.dutyname}
+                        </td>
+                        <td
+                          style={{
+                            borderBottom: "1px solid #ddd",
+                            padding: "8px",
+                            textAlign: "center",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handlePostClick(post.id)}
+                        >
+                          {post.title}
+                        </td>
+                        <td style={{ borderBottom: "1px solid #ddd", padding: "8px", textAlign: "center" }}>{post.username}</td>
+                        <td style={{ borderBottom: "1px solid #ddd", padding: "8px", textAlign: "center" }}>{post.createDate}</td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan="5" style={{ textAlign: "center" }}>현재 페이지에 표시할 게시글이 없습니다.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         ) : (
           <p>게시글이 없습니다.</p>
         )}
